@@ -9,7 +9,6 @@ const symbolsCheckbox = document.getElementById("symbols");
 const generateButton = document.getElementById("generate-btn");
 const copyButton = document.getElementById("copy-btn");
 const strengthBar = document.querySelector(".strength-bar");
-const strengthText = document.querySelector(".strength-container p");
 const strengthLabel = document.getElementById("strength-label");
 
 // Character sets
@@ -30,7 +29,7 @@ function makePassword() {
   const includeLowercase = lowercaseCheckbox.checked;
   const includeNumbers = numbersCheckbox.checked;
   const includeSymbols = symbolsCheckbox.checked;
-
+  //  if all false
   if (
     !includeUppercase &&
     !includeLowercase &&
@@ -90,28 +89,23 @@ function updateStrengthMeter(password) {
 
   // here the .min will get the minimum value
   // but this will make sure that "at maximum" you would get 40
-
-  console.log(passwordLength);
-
   strengthScore += Math.min(passwordLength * 2, 40);
 
-  console.log(strengthScore);
+
 
   if (hasUppercase) strengthScore += 15;
   if (hasLowercase) strengthScore += 15;
   if (hasNumbers) strengthScore += 15;
   if (hasSymbols) strengthScore += 15;
-  console.log(strengthScore);
+ 
 
   // enforce minimum score for every short password
   if (passwordLength < 8) {
     strengthScore = Math.min(strengthScore, 40);
   }
-  console.log(strengthScore);
 
   const safeScore = Math.max(5, Math.min(100, strengthScore));
   strengthBar.style.width = safeScore + "%";
-  console.log(safeScore);
 
   let strengthLabelText = "";
   let barColor = "";
